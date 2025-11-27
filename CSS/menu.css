@@ -1,0 +1,57 @@
+.header {
+    background-color: #000;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 40px;       /* Tamanho da imagem */
+    height: 40px;      /* Tamanho da imagem */
+    border-radius: 50%; /* Torna a imagem redonda */
+    object-fit: cover;  /* Ajusta a imagem sem distorcer */
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #ccc;
+}
+
+.btn-login {
+    background: #666;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-login:hover {
+    background: #888;
+    color: white;
+    transform: scale(1.05);
+}

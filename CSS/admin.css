@@ -1,0 +1,98 @@
+/* Admin Styles */
+body {
+    background-color: rgba(128, 128, 128, 1);
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.admin-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.admin-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #000;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 0.25rem;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.btn-cadastrar {
+    background: #666;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 2rem auto 0;
+}
+
+.btn-cadastrar:hover {
+    background: #888;
+    transform: scale(1.05);
+}
+
+.produtos-lista {
+    margin-top: 2rem;
+}
+
+.produto-item {
+    background: #f8f8f8;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #666;
+}
+
+.placeholder {
+    color: #888;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 2rem 0;
+}
