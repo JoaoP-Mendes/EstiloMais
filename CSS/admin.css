@@ -90,6 +90,16 @@ textarea {
     margin-top: 0.25rem;
 }
 
+input[type="file"] {
+    padding: 0.5rem;
+    border: 2px dashed #ccc;
+    background: #f9f9f9;
+}
+
+input[type="file"]:hover {
+    border-color: #666;
+    background: #f0f0f0;
+}
 .divider {
     border: none;
     height: 1px;

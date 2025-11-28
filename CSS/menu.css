@@ -16,10 +16,10 @@
 }
 
 .logo-icon {
-    width: 40px;       /* Tamanho da imagem */
-    height: 40px;      /* Tamanho da imagem */
-    border-radius: 50%; /* Torna a imagem redonda */
-    object-fit: cover;  /* Ajusta a imagem sem distorcer */
+    width: 40px;       
+    height: 40px;      
+    border-radius: 50%;
+    object-fit: cover;  
 }
 
 .nav {
@@ -36,6 +36,22 @@
 
 .nav a:hover {
     color: #ccc;
+}
+
+.footer {
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+.contato {
+    margin-bottom: 1rem;
+}
+
+.contato p {
+    margin: 0.5rem 0;
 }
 
 .btn-login {

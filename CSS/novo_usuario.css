@@ -4,13 +4,13 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.cadastro-container {
+.cadastro {
     max-width: 400px;
     margin: 5rem auto;
     padding: 0;
 }
 
-.cadastro-card {
+.cadastro_card {
     background: white;
     padding: 3rem 2rem;
     border-radius: 10px;
@@ -18,13 +18,13 @@ body {
     text-align: center;
 }
 
-.cadastro-title {
+.cadastro_titulo {
     font-size: 2rem;
     margin-bottom: 2rem;
     color: #000;
 }
 
-.form-group {
+.form_group {
     margin-bottom: 1.5rem;
     text-align: left;
 }
@@ -44,7 +44,7 @@ input {
     font-size: 1rem;
 }
 
-.btn-cadastrar {
+.btn_cadastrar {
     background: #666;
     color: white;
     padding: 12px 40px;
@@ -58,24 +58,24 @@ input {
     width: 100%;
 }
 
-.btn-cadastrar:hover {
+.btn_cadastrar:hover {
     background: #888;
     transform: scale(1.02);
 }
 
-.login-link {
+.login_cadastro {
     text-align: center;
     margin-top: 2rem;
     padding-top: 1rem;
     border-top: 1px solid #ccc;
 }
 
-.login-link a {
+.login_cadastro a {
     color: #000;
     text-decoration: none;
     font-weight: bold;
 }
 
-.login-link a:hover {
+.login_cadastro a:hover {
     text-decoration: underline;
 }

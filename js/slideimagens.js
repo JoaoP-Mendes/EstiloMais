@@ -2,14 +2,14 @@ let currentSlide = 0;
 let slideInterval;
 
 function showSlide(index) {
-    const slides = document.querySelectorAll('.carrossel-slide');
+    const slides = document.querySelectorAll('.slide_carrossel');
     const totalSlides = slides.length;
     
     if (index >= totalSlides) currentSlide = 0;
     else if (index < 0) currentSlide = totalSlides - 1;
     else currentSlide = index;
     
-    const carrossel = document.querySelector('.carrossel-container');
+    const carrossel = document.querySelector('.slide_div');
     carrossel.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
 
@@ -30,7 +30,10 @@ function resetInterval() {
     }, 5000);
 }
 
-// Inicializar
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     showSlide(0);
     slideInterval = setInterval(() => {

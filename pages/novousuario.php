@@ -19,33 +19,46 @@
         </nav>
     </header>
 
-    <div class="cadastro-container">
-        <div class="cadastro-card">
-            <h2 class="cadastro-title">CADASTRO</h2>
+    <div class="cadastro">
+        <div class="cadastro_card">
+            <h2 class="cadastro_titulo">CADASTRO</h2>
             
             <form action="processa_cadastro.php" method="POST">
-                <div class="form-group">
+                <div class="form_group">
                     <label>Nome:</label>
                     <input type="text" name="nome" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form_group">
                     <label>Email:</label>
                     <input type="email" name="email" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form_group">
                     <label>Senha:</label>
                     <input type="password" name="senha" required>
                 </div>
                 
-                <button type="submit" class="btn-cadastrar">Cadastrar</button>
+                <button type="submit" class="btn_cadastrar">Cadastrar</button>
             </form>
 
-            <div class="login-link">
+            <div class="login_cadastro">
                 <p><strong>Já tem conta? <a href="login.php">Faça login aqui</a></strong></p>
             </div>
         </div>
     </div>
+
+
+
+
+<footer class="footer">
+    <div class="contato">
+        <p><strong>FALE CONOSCO:</strong></p>
+        <p>(67) 9 8112-7218</p>
+        <p>maisStyle@gmail.com</p>
+    </div>
+    <p>&copy; 2025 6+STYLE</p>
+</footer>
+
 </body>
 </html>

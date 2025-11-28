@@ -29,39 +29,39 @@ if (!isset($_SESSION['usuario'])) {
 
     <div class="admin-container">
     <!-- Formulário de Cadastro -->
-    <div class="admin-card">
-        <h2 class="section-title">Cadastrar Novo Casaco</h2>
+   <div class="admin-card">
+    <h2 class="section-title">Cadastrar Novo Casaco</h2>
+    
+    <form action="processa_produto.php" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Nome do Casaco:</label>
+            <input type="text" name="nome" required>
+        </div>
         
-        <form action="processa_produto.php" method="POST">
-            <div class="form-group">
-                <label>Nome do Casaco:</label>
-                <input type="text" name="nome" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Quantidade:</label>
-                <input type="number" name="qtd" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Descrição:</label>
-                <textarea name="descricao" required></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label>Valor:</label>
-                <input type="number" step="0.01" name="valor" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Nome da Imagem:</label>
-                <input type="text" name="imagem" required>
-                <div class="placeholder">ex: casaco1.jpg</div>
-            </div>
-            
-            <button type="submit" class="btn-cadastrar">Cadastrar Produto</button>
-        </form>
-    </div>
+        <div class="form-group">
+            <label>Quantidade:</label>
+            <input type="number" name="qtd" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Descrição:</label>
+            <textarea name="descricao" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Valor:</label>
+            <input type="number" step="0.01" name="valor" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Imagem do Casaco:</label>
+            <input type="file" name="imagem" accept="image/*" required>
+            <div class="placeholder">Formatos: JPG, PNG, GIF (Máx. 2MB)</div>
+        </div>
+        
+        <button type="submit" class="btn-cadastrar">Cadastrar Produto</button>
+    </form>
+</div>
 
     <hr class="divider">
 

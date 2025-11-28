@@ -4,13 +4,13 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.login-container {
+.login_div {
     max-width: 400px;
     margin: 5rem auto;
     padding: 0;
 }
 
-.login-card {
+.login_card {
     background: white;
     padding: 3rem 2rem;
     border-radius: 10px;
@@ -18,7 +18,7 @@ body {
     text-align: center;
 }
 
-.login-title {
+.login_tittle {
     font-size: 2rem;
     margin-bottom: 2rem;
     color: #000;
@@ -44,7 +44,7 @@ input {
     font-size: 1rem;
 }
 
-.btn-enter {
+.btn_entrar {
     background: #666;
     color: white;
     padding: 12px 40px;
@@ -58,24 +58,24 @@ input {
     width: 100%;
 }
 
-.btn-enter:hover {
+.btn_entrar:hover {
     background: #888;
     transform: scale(1.02);
 }
 
-.cadastro-link {
+.cadastro_login {
     text-align: center;
     margin-top: 2rem;
     padding-top: 1rem;
     border-top: 1px solid #ccc;
 }
 
-.cadastro-link a {
-    color: #000;
+.cadastro_login a {
+    color: #140f2bff;
     text-decoration: none;
     font-weight: bold;
 }
 
-.cadastro-link a:hover {
+.cadastro_login a:hover {
     text-decoration: underline;
 }

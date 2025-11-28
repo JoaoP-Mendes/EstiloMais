@@ -5,9 +5,8 @@ body {
     margin: 0;
 }
 
-/* Carrossel */
-/* Carrossel CORRIGIDO */
-.carrossel {
+
+.slide {
     position: relative;
     width: 80%;
     max-width: 800px;
@@ -17,25 +16,25 @@ body {
     border: 2px solid #000;
 }
 
-.carrossel-container {
+.slide_div {
     display: flex;
     transition: transform 0.5s ease;
     width: 100%;
 }
 
-.carrossel-slide {
+.slide_carrossel {
     min-width: 100%;
     flex-shrink: 0;
 }
 
-.carrossel-slide img {
+.slide_carrossel img {
     width: 100%;
     height: 300px;
     object-fit: cover;
     display: block;
 }
 
-.carrossel-botoes {
+.botao_slide {
     position: absolute;
     top: 50%;
     width: 100%;
@@ -45,7 +44,7 @@ body {
     padding: 0 10px;
 }
 
-.carrossel-btn {
+.btn_slide {
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
@@ -60,11 +59,10 @@ body {
     justify-content: center;
 }
 
-.carrossel-btn:hover {
+.btn_slide:hover {
     background: rgba(0, 0, 0, 0.8);
 }
 
-/* Produtos */
 .produtos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -74,7 +72,7 @@ body {
     margin: 0 auto;
 }
 
-.produto {
+.casaco {
     background: #f5f5f5;
     border-radius: 8px;
     padding: 1rem;
@@ -82,7 +80,7 @@ body {
     border: 1px solid #ddd;
 }
 
-.produto img {
+.casaco img {
     width: 100%;
     height: 200px;
     object-fit: cover;
