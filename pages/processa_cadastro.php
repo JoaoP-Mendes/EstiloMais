@@ -7,7 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuario->email = $_POST['email'];
     $usuario->senha = $_POST['senha'];
     
-    // Conexão simples com banco
     try {
         $conexao = new PDO('mysql:host=localhost;dbname=estacio2025', 'root', '');
         $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['id_usuario'] = $usuario['id_usuario'];
             $_SESSION['email'] = $usuario['email'];
             
-            // Se for admin, redireciona para área admin
             if ($email == 'admin@style.com') {
                 header('Location: areaAdmin.php');
             } else {

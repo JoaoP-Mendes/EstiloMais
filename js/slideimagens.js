@@ -31,9 +31,6 @@ function resetInterval() {
 }
 
 
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
     showSlide(0);
     slideInterval = setInterval(() => {

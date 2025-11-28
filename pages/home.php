@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>+STYLE - Casacos</title>
+    <title>+STYLE</title>
     <link rel="stylesheet" href="../CSS/home.css">
     <link rel="stylesheet" href="../CSS/menu.css">
 
@@ -21,8 +21,10 @@
         <a href="areaAdmin.php" class="btn-login">Adm</a>
     </nav>
 </header>
-    <!-- Area do Slide -->
+   
+
 <div class="slide">
+     <!-- Area do Slide -->
     <div class="slide_div">
         <div class="slide_carrossel">
             <img src="../imagem/slide/promocao.png" alt="Casaco 1">
@@ -35,13 +37,13 @@
         </div>
     </div>
         <div class="botao_slide">
-        <button class="btn_slide" onclick="prevSlide()">❮</button>
-        <button class="btn_slide" onclick="nextSlide()">❯</button>
+        <button class="btn_slide" onclick="prevSlide()">U+003e</button>
+        <button class="btn_slide" onclick="nextSlide()">U+276f</button>
     </div>
 </div>
 
     <!--Area produtos-->
-    <section class="produtos">
+<section class="produtos">
     <div class="casaco">
         <img src="../imagem/casacos/Azul bonito.png" alt="Casaco Style Preto">
         <h3>Casaco Style azul</h3>

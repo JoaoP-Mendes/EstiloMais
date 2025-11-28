@@ -28,13 +28,14 @@ if (!isset($_SESSION['usuario'])) {
     </header>
 
     <div class="admin-container">
+
     <!-- Formulário de Cadastro -->
    <div class="admin-card">
     <h2 class="section-title">Cadastrar Novo Casaco</h2>
     
     <form action="processa_produto.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <label>Nome do Casaco:</label>
+            <label>Nome do Casaco: </label>
             <input type="text" name="nome" required>
         </div>
         

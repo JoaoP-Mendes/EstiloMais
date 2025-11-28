@@ -6,12 +6,11 @@ class Usuario {
     public $senha;
     
     public function cadastrar($conexao) {
-        // Verificar se email já existe
         $stmt = $conexao->prepare("SELECT id_usuario FROM usuarios WHERE email = ?");
         $stmt->execute([$this->email]);
         
         if ($stmt->fetch()) {
-            return false; // Email já cadastrado
+            return false; 
         }
         
         $senhaHash = password_hash($this->senha, PASSWORD_DEFAULT);
