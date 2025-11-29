@@ -4,7 +4,6 @@ if (!isset($_SESSION['email'])) {
     header('Location: login.php');
     exit();
 }
-
 require_once '../Classes/produto.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif'];
         if (!in_array($imagem['type'], $tiposPermitidos)) {
-            die('Tipo de arquivo não permitido. Use JPG, PNG ou GIF.');
+            die('Tipo de arquivo não permitido.');
         }
         
         if ($imagem['size'] > 2 * 1024 * 1024) {
@@ -30,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         $extensao = pathinfo($imagem['name'], PATHINFO_EXTENSION);
         $nomeImagem = uniqid() . '.' . $extensao;
-        $caminhoDestino = '../imagem/uploads/' . $nomeImagem;  // ← MUDEI AQUI
+        $caminhoDestino = '../imagem/uploads/' . $nomeImagem;
         
         if (move_uploaded_file($imagem['tmp_name'], $caminhoDestino)) {
             $produto->cadastrarProduto(
@@ -42,10 +41,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             );
             header('Location: areaAdmin.php?sucesso=1');
         } else {
-            die('Erro ao fazer upload da imagem.');
+            die('Erro ao fazer upload.');
         }
     } else {
-        die('Erro no upload da imagem.');
+        $produto->cadastrarProduto(
+            $_POST['nome'],
+            $_POST['qtd'],
+            $_POST['descricao'],
+            $_POST['valor'],
+            $_POST['imagem']
+        );
+        header('Location: areaAdmin.php?sucesso=1');
     }
 }
 ?>
