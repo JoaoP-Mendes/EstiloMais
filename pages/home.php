@@ -22,7 +22,6 @@
     </nav>
 </header>
    
-
 <div class="slide">
      <!-- Area do Slide -->
     <div class="slide_div">
@@ -45,28 +44,28 @@
     <!--Area produtos-->
 <section class="produtos">
     <div class="casaco">
-        <img src="../imagem/casacos/Azul bonito.png" alt="Casaco Style Preto">
-        <h3>Casaco Style azul</h3>
-        <p>Casaco estiliso azul</p>
-        <p class="preco">R$ 249,99</p>
+            <img src="../imagem/casacos/Azul bonito.png" alt="Casaco Style Preto">
+            <h3>Casaco Style azul</h3>
+            <p>Casaco estiliso azul</p>
+            <p class="preco">R$ 249,99</p>
         <button>Comprar</button>
 
     </div>
     
     <div class="casaco">
-        <img src="../imagem/casacos/Vemelho.png" alt="Casaco Elegance">
-        <h3>Casaco Style Azul</h3>
-        <p>Casaco estiliso vermelho</p>
-        <p class="preco">R$ 249,99</p>
+            <img src="../imagem/casacos/Vemelho.png" alt="Casaco Elegance">
+            <h3>Casaco Style Azul</h3>
+            <p>Casaco estiliso vermelho</p>
+            <p class="preco">R$ 249,99</p>
         <button>Comprar</button>
 
     </div>
 
     <div class="casaco">
-        <img src="../imagem/casacos/strangercasaco.png" alt="Casaco Elegance">
-        <h3>Casaco Stranger Things</h3>
-        <p>Casaco premium Stranger Things</p>
-        <p class="preco">R$ 199,99</p>
+            <img src="../imagem/casacos/strangercasaco.png" alt="Casaco Elegance">
+            <h3>Casaco Stranger Things</h3>
+            <p>Casaco premium Stranger Things</p>
+            <p class="preco">R$ 199,99</p>
         <button>Comprar</button>
 
     </div>
@@ -82,30 +81,39 @@
 
     
 </section>
-    <section class="produtos">
+<section class="produtos">
     <?php
-    try {
-        $conexao = new PDO('mysql:host=localhost;dbname=estacio2025', 'root', '');
-    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once '../Classes/produto.php';
+    
+    $produto = new Produto();
+    $produto->conectar("estacio2025", "localhost", "root", "");
+    
+    if ($produto->msgErro == "") {
+        $produtos = $produto->listarProdutos();
         
-        $stmt = $conexao->query("SELECT * FROM produtos WHERE qtd > 0");
-        $produtos = $stmt->fetchAll();
-        
-        foreach ($produtos as $produto) {
+        foreach ($produtos as $prod) {
+            $caminhoImagem = '../imagem/';
+
+            if (strlen($prod['imagem']) > 10 && is_numeric(substr($prod['imagem'], 0, 1))) {
+                $caminhoImagem .= 'uploads/' . $prod['imagem'];
+            } else {
+                $caminhoImagem .= 'casacos/' . $prod['imagem'];
+            }
+            
             echo "
             <div class='casaco'>
-                <img src='../uploads/{$produto['imagem']}' alt='{$produto['nome']}'>
-                <h3>{$produto['nome']}</h3>
-                <p>{$produto['descricao']}</p>
-                <p class='preco'>R$ {$produto['valor']}</p>
+                <img src='{$caminhoImagem}' alt='{$prod['nome']}'>
+                <h3>{$prod['nome']}</h3>
+                <p>{$prod['descricao']}</p>
+                <p class='preco'>R$ {$prod['valor']}</p>
                 <button>Comprar</button>
             </div>";
         }
-    } catch(PDOException $e) {
+    } else {
         echo "<p>Erro ao carregar produtos</p>";
     }
     ?>
-</section>  
+</section>
 
 <footer class="footer">
         <div class="contato">

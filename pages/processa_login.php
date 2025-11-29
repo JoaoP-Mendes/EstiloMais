@@ -5,18 +5,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     
-    try {
-        $conexao = new PDO('mysql:host=localhost;dbname=estacio2025', 'root', '');
-        $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $usuario = new Usuario();
+        $usuario->conectar("estacio2025", "localhost", "root", "");
+    
+        if ($usuario->msgErro != "") {
+            echo "Erro na conexão: ".$usuario->msgErro;
+            exit;
+        }
         
-        $usuario = Usuario::login($conexao, $email, $senha);
-        
-        if ($usuario) {
-            session_start();
-            $_SESSION['usuario'] = $usuario['nome'];
-            $_SESSION['id_usuario'] = $usuario['id_usuario'];
-            $_SESSION['email'] = $usuario['email'];
-            
+        if ($usuario->logarUsuario($email, $senha)) {
+            // Login bem-sucedido
             if ($email == 'admin@style.com') {
                 header('Location: areaAdmin.php');
             } else {
@@ -25,8 +23,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             header('Location: login.php?erro=1');
         }
-    } catch(PDOException $e) {
-        echo "Erro: " . $e->getMessage();
-    }
 }
 ?>

@@ -1,11 +1,12 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['email'])) {
     header('Location: login.php');
     exit();
 }
-?>
 
+$nome_usuario = $_SESSION['nome'];
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -35,10 +36,10 @@ if (!isset($_SESSION['usuario'])) {
     
     <form action="processa_produto.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <label>Nome do Casaco: </label>
+            <label>Nome do Casaco:</label>
             <input type="text" name="nome" required>
         </div>
-        
+
         <div class="form-group">
             <label>Quantidade:</label>
             <input type="number" name="qtd" required>
@@ -56,7 +57,7 @@ if (!isset($_SESSION['usuario'])) {
         
         <div class="form-group">
             <label>Imagem do Casaco:</label>
-            <input type="file" name="imagem" accept="image/*" required>
+            <input type="file" name="imagem_arquivo" accept="image/*" required>
             <div class="placeholder">Formatos: JPG, PNG, GIF (Máx. 2MB)</div>
         </div>
         
@@ -71,29 +72,32 @@ if (!isset($_SESSION['usuario'])) {
         <h2 class="section-title">Produtos Cadastrados</h2>
         
         <div class="produtos-lista">
-            <?php
-            try {
-                $conexao = new PDO('mysql:host=localhost;dbname=estacio2025', 'root', '');
-                $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        <?php
+            require_once '../Classes/produto.php';
+            
+            $produto = new Produto();
+            $produto->conectar("estacio2025", "localhost", "root", "");
                 
-                $stmt = $conexao->query("SELECT * FROM produtos");
-                $produtos = $stmt->fetchAll();
+            if ($produto->msgErro == "") {
+                $produtos = $produto->listarProdutos();
                 
                 if (count($produtos) > 0) {
-                    foreach ($produtos as $produto) {
-                        echo "
-                        <div class='produto-item'>
-                            <strong>{$produto['nome']} - R$ {$produto['valor']}</strong>
-                            <br>Quantidade: {$produto['qtd']}
-                        </div>";
-                    }
+                foreach ($produtos as $prod) {
+                    echo "
+                    <div class='produto-item'>
+                        <strong>{$prod['nome']} - R$ {$prod['valor']}</strong>
+                        <br>Quantidade: {$prod['qtd']}
+                        <br>Descrição: {$prod['descricao']}
+                        <br>Imagem: {$prod['imagem']}
+                    </div>";
+                }
                 } else {
                     echo "<p>Nenhum produto cadastrado ainda.</p>";
                 }
-            } catch(PDOException $e) {
+            } else {
                 echo "<p>Erro ao carregar produtos</p>";
             }
-            ?>
+        ?>
         </div>
     </div>
 </div>
