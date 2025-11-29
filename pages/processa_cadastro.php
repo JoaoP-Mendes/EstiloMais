@@ -9,10 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Erro na conexão : ".$usuarui->msgerro;
         exit;
     }
-    $nome = $_POST['nome'];
-
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
 
     if ($usuario->cadastrar($nome, $email, $senha)){
         header('Location: login.php?sucesso=1');
