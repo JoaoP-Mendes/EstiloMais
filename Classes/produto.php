@@ -7,13 +7,17 @@ class Produto {
     
     public function conectar() {
         $this->conn = conectarBanco();
-        return true;
+        return true; 
+    
     }
     
+
     public function cadastrar($nome, $qtd, $descricao, $valor, $imagem) {
         $nome = $this->conn->real_escape_string($nome);
         $descricao = $this->conn->real_escape_string($descricao);
         $imagem = $this->conn->real_escape_string($imagem);
+        
+
         
         $sql = "INSERT INTO produtos (nome, qtd, descricao, valor, imagem) 
                 VALUES ('$nome', '$qtd', '$descricao', '$valor', '$imagem')";
@@ -29,6 +33,7 @@ class Produto {
         while ($row = $result->fetch_assoc()) {
             $produtos[] = $row;
         }
+
         return $produtos;
     }
     
@@ -37,10 +42,10 @@ class Produto {
         $sql = "SELECT * FROM produtos WHERE id_produto = $id";
         $result = $this->conn->query($sql);
         
+        
         if ($result->num_rows > 0) {
             return $result->fetch_assoc();
-        }
-        return null;
+        }return null;
     }
     
     public function atualizarEstoque($id, $nova_qtd) {

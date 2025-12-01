@@ -85,21 +85,39 @@
 
 <?php
 require_once '../Classes/produto.php';
+
 $produto = new Produto();
 
 if ($produto->conectar()) {
     $produtos = $produto->listar();
     
     foreach ($produtos as $prod) {
-        echo "
-        <div class='casaco'>
-            <img src='../imagem/casacos/{$prod['imagem']}' alt='{$prod['nome']}'>
-            <h3>{$prod['nome']}</h3>
-            <p>{$prod['descricao']}</p>
-            <p class='preco'>R$ {$prod['valor']}</p>
+        $caminhoImagem = '../imagem/';
+        
+        if (preg_match('/^[a-f0-9]+_[0-9]+\./', $prod['imagem'])) {
+            $caminhoImagem .= 'uploads/' . $prod['imagem'];
+        } else {
+            $caminhoImagem .= 'casacos/' . $prod['imagem'];
+        }
+        
+        echo '
+        <div class="casaco">
+            <img src="' . $caminhoImagem . '" alt="' . htmlspecialchars($prod['nome']) . '">
+            <h3>' . htmlspecialchars($prod['nome']) . '</h3>
+            <p>' . htmlspecialchars($prod['descricao']) . '</p>
+            <p class="preco">R$ ' . number_format($prod['valor'], 2, ',', '.') . '</p>
             <button>Comprar</button>
-        </div>";
+        </div>';
     }
+} else {
+    echo '
+    <div class="casaco">
+        <img src="../imagem/casacos/Azul bonito.png" alt="Casaco Azul">
+        <h3>Casaco Azul</h3>
+        <p>Casaco estiloso azul</p>
+        <p class="preco">R$ 249,99</p>
+        <button>Comprar</button>
+    </div>';
 }
 ?>
 </section>
