@@ -82,37 +82,26 @@
     
 </section>
 <section class="produtos">
-    <?php
-    require_once '../Classes/produto.php';
-    
-    $produto = new Produto();
-    $produto->conectar("estacio2025", "localhost", "root", "");
-    
-    if ($produto->msgErro == "") {
-        $produtos = $produto->listarProdutos();
-        
-        foreach ($produtos as $prod) {
-            $caminhoImagem = '../imagem/';
 
-            if (strlen($prod['imagem']) > 10 && is_numeric(substr($prod['imagem'], 0, 1))) {
-                $caminhoImagem .= 'uploads/' . $prod['imagem'];
-            } else {
-                $caminhoImagem .= 'casacos/' . $prod['imagem'];
-            }
-            
-            echo "
-            <div class='casaco'>
-                <img src='{$caminhoImagem}' alt='{$prod['nome']}'>
-                <h3>{$prod['nome']}</h3>
-                <p>{$prod['descricao']}</p>
-                <p class='preco'>R$ {$prod['valor']}</p>
-                <button>Comprar</button>
-            </div>";
-        }
-    } else {
-        echo "<p>Erro ao carregar produtos</p>";
+<?php
+require_once '../Classes/produto.php';
+$produto = new Produto();
+
+if ($produto->conectar()) {
+    $produtos = $produto->listar();
+    
+    foreach ($produtos as $prod) {
+        echo "
+        <div class='casaco'>
+            <img src='../imagem/casacos/{$prod['imagem']}' alt='{$prod['nome']}'>
+            <h3>{$prod['nome']}</h3>
+            <p>{$prod['descricao']}</p>
+            <p class='preco'>R$ {$prod['valor']}</p>
+            <button>Comprar</button>
+        </div>";
     }
-    ?>
+}
+?>
 </section>
 
 <footer class="footer">

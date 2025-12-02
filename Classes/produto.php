@@ -1,35 +1,53 @@
 <?php
-class Produto{
-    private $pdo;
-    public $msgErro = "";
-    public function conectar($nome, $host, $usuario, $senha)
-    {
-        global $pdo;
-        try {
-            $pdo = new PDO("mysql:dbname=".$nome.";host=".$host, $usuario, $senha);
-        } catch (PDOException $e) {
-            $this->msgErro = $e->getMessage();
-        }
-    }
-    public function cadastrarProduto($nome, $qtd, $descricao, $valor, $imagem)
-    {
-        global $pdo;
-            $sql = $pdo->prepare("INSERT INTO produtos (nome, qtd, descricao, valor, imagem) VALUES (:n, :q, :d, :v, :i)");
-            $sql->bindValue(":n", $nome);
-            $sql->bindValue(":q", $qtd);
-            $sql->bindValue(":d", $descricao);
-            $sql->bindValue(":v", $valor);
-            $sql->bindValue(":i", $imagem);
-            $sql->execute();
-            return true;
-    }
+require_once __DIR__ . '/../config.php';
 
-    public function listarProdutos(){
-        global $pdo;
+class Produto {
+    public $msgErro = "";
+    private $conn;
+    
+    public function conectar() {
+        $this->conn = conectarBanco();
+        return true;
+    }
+    
+    public function cadastrar($nome, $qtd, $descricao, $valor, $imagem) {
+        $nome = $this->conn->real_escape_string($nome);
+        $descricao = $this->conn->real_escape_string($descricao);
+        $imagem = $this->conn->real_escape_string($imagem);
         
-        $sql = $pdo->prepare("SELECT * FROM produtos WHERE qtd > 0");
-        $sql->execute();
-        return $sql->fetchAll();
+        $sql = "INSERT INTO produtos (nome, qtd, descricao, valor, imagem) 
+                VALUES ('$nome', '$qtd', '$descricao', '$valor', '$imagem')";
+        
+        return $this->conn->query($sql);
+    }
+    
+    public function listar() {
+        $sql = "SELECT * FROM produtos WHERE qtd > 0 ORDER BY nome";
+        $result = $this->conn->query($sql);
+        
+        $produtos = [];
+        while ($row = $result->fetch_assoc()) {
+            $produtos[] = $row;
+        }
+        return $produtos;
+    }
+    
+    public function buscarPorId($id) {
+        $id = (int)$id;
+        $sql = "SELECT * FROM produtos WHERE id_produto = $id";
+        $result = $this->conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        }
+        return null;
+    }
+    
+    public function atualizarEstoque($id, $nova_qtd) {
+        $id = (int)$id;
+        $nova_qtd = (int)$nova_qtd;
+        $sql = "UPDATE produtos SET qtd = $nova_qtd WHERE id_produto = $id";
+        return $this->conn->query($sql);
     }
 }
 ?>

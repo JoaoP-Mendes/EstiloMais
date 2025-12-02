@@ -1,23 +1,23 @@
 <?php
+session_start();
 require_once '../Classes/usuario.php';
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+if ($_POST) {
     $usuario = new Usuario();
-
-    $usuario->conectar("estacio2025", "localhost", "root", "");
     
-    if ($usuario->msgErro != "") {
-        echo "Erro na conexão : ".$usuarui->msgerro;
-        exit;
+    if (!$usuario->conectar()) {
+        die("Erro banco: " . $usuario->msgErro);
     }
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
-
-    if ($usuario->cadastrar($nome, $email, $senha)){
+    
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    
+    if ($usuario->cadastrar($nome, $email, $senha)) {
         header('Location: login.php?sucesso=1');
     } else {
         header('Location: novousuario.php?erro=1');
     }
-
+    exit();
 }
 ?>

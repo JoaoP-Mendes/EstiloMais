@@ -1,56 +1,60 @@
 <?php
-class Usuario {
-    private $pdo;
-    public $msgErro = "";
+require_once __DIR__ . '/../config.php';
 
-    public function conectar($nome, $host, $usuario, $senha) {
-        global $pdo;
-        try {
-            $pdo = new PDO("mysql:dbname=".$nome, $usuario, $senha);
-        } catch (PDOException $e) {
-            $this->msgErro = $e->getMessage();
-        }
+class Usuario {
+    public $msgErro = "";
+    private $conn;
+    
+    public function conectar() {
+        $this->conn = conectarBanco();
+        return true;
     }
     
     public function cadastrar($nome, $email, $senha) {
-        global $pdo;
-
-        $sql = $pdo->prepare ("SELECT id_usuario FROM usuarios WHERE email = :e");
-        $sql->bindValue(":e", $email);
-        $sql->execute();
-
-        if ($sql->rowCount() > 0){
+        $nome = $this->conn->real_escape_string($nome);
+        $email = $this->conn->real_escape_string($email);
+                $sql = "SELECT id_usuario FROM usuarios WHERE email = '$email'";
+        $result = $this->conn->query($sql);
+        
+        if ($result->num_rows > 0) {
             return false;
         }
-        else {
-             $sql = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (:n, :e, :s)");
-            $sql->bindValue(":n", $nome);
-            $sql->bindValue(":e", $email);
-            $sql->bindValue(":s", md5($senha));
-            $sql->execute();
-            return true;
-        }
-    }
 
-    public function logarUsuario($email, $senha)
-    {
-        global $pdo;
+        $senha_md5 = md5($senha);
+        $sql = "INSERT INTO usuarios (nome, email, senha) 
+                VALUES ('$nome', '$email', '$senha_md5')";
         
-        $sql = $pdo->prepare("SELECT id_usuario, nome FROM usuarios WHERE email = :e AND senha = :s");
-        $sql->bindValue(":e", $email);
-        $sql->bindValue(":s", md5($senha));
-        $sql->execute();
+        return $this->conn->query($sql);
+    }
+    
+    public function logar($email, $senha) {
+        $email = $this->conn->real_escape_string($email);
+        $senha_md5 = md5($senha);
         
-        if ($sql->rowCount() > 0) {
-            $dado = $sql->fetch();
-            session_start();
-            $_SESSION['id_usuario'] = $dado['id_usuario'];
-            $_SESSION['nome'] = $dado['nome'];
+        $sql = "SELECT id_usuario, nome FROM usuarios 
+                WHERE email = '$email' AND senha = '$senha_md5'";
+        
+        $result = $this->conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            $dados = $result->fetch_assoc();
+            $_SESSION['id_usuario'] = $dados['id_usuario'];
+            $_SESSION['nome'] = $dados['nome'];
             $_SESSION['email'] = $email;
             return true;
-        } else {
-            return false; 
         }
+        return false;
+    }
+    
+    public function listarUsuarios() {
+        $sql = "SELECT id_usuario, nome, email FROM usuarios ORDER BY nome";
+        $result = $this->conn->query($sql);
+        
+        $usuarios = [];
+        while ($row = $result->fetch_assoc()) {
+            $usuarios[] = $row;
+        }
+        return $usuarios;
     }
 }
 ?>
