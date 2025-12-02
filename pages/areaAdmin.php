@@ -31,31 +31,37 @@ if ($usuario->conectar() && $produto->conectar()) {
 <body>
     <header class="header">
         <div class="logo">
-            <img src="../imagem/logo-icon.png" alt="+STYLE" class="logo-icon">
+            <img src="../imagem/icone.png" alt="+STYLE" class="logo-icon">
             +STYLE - Painel Admin
         </div>
         <nav class="nav">
-            <span style="color: #ccc;">Olá, <?php echo $_SESSION['nome']; ?>!</span>
-            <a href="home.php">Home</a>
+            <span style="color: white;">Olá, <?php echo $_SESSION['nome']; ?>!</span>
+            <a href="home.php" class="btn-login">Home</a>
             <a href="logout.php" class="btn-login">Sair</a>
         </nav>
     </header>
 
     <div class="admin-container">
         <div class="admin-card">
-            <h2>➕ Cadastrar Novo Casaco</h2>
-            <form action="processa_produto.php" method="POST">
-                <input type="text" name="nome" placeholder="Nome do Casaco" required>
-                <input type="number" name="qtd" placeholder="Quantidade" required>
-                <textarea name="descricao" placeholder="Descrição" required></textarea>
-                <input type="number" step="0.01" name="valor" placeholder="Valor R$" required>
-                <input type="text" name="imagem" placeholder="Nome da imagem" required>
-                <button type="submit">Cadastrar Produto</button>
-            </form>
+        <h2>➕ Cadastrar Novo Casaco</h2>
+        <form action="processa_produto.php" method="POST" enctype="multipart/form-data">
+            <input type="text" name="nome" placeholder="Nome do Casaco" required>
+            <input type="number" name="qtd" placeholder="Quantidade" required>
+            <textarea name="descricao" placeholder="Descrição" required></textarea>
+            <input type="number" step="0.01" name="valor" placeholder="Valor R$" required>
+            
+            <div class="upload-area">
+                <label for="imagem_arquivo">Imagem do Casaco:</label>
+                <input type="file" name="imagem_arquivo" id="imagem_arquivo" accept="image/*" required>
+                <small>Aceito: JPG, PNG, GIF (Máx. 2MB)</small>
+            </div>
+            
+            <button type="submit">Cadastrar Produto</button>
+        </form>
         </div>
 
         <div class="admin-card">
-            <h2>👥 Usuários Cadastrados</h2>
+            <h2>Usuários Cadastrados</h2>
             <div class="lista">
                 <?php foreach ($lista_usuarios as $user): ?>
                 <div class="item">
@@ -67,7 +73,7 @@ if ($usuario->conectar() && $produto->conectar()) {
         </div>
 
         <div class="admin-card">
-            <h2>🧥 Produtos Cadastrados</h2>
+            <h2>Casacos Cadastrados</h2>
             <div class="lista">
                 <?php foreach ($lista_produtos as $prod): ?>
                 <div class="item">
